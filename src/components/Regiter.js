@@ -95,7 +95,7 @@ const Regiter = () => {
               <ErrorMessage name="termsAndCondition" component="div" />
             </div>
             <button className="btn btn-primary btn-block mt-4" type="submit">
-              Submit
+              Register
             </button>
           </Form>
         </div>
