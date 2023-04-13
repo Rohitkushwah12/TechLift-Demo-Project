@@ -40,14 +40,25 @@ const Login = () => {
             : alert("Invalid login credentials");
         }}
       >
-        <div>
-          <Form>
+        <div
+          style={{
+            width: "400px",
+            backgroundColor: "#f5f5f5",
+            margin: "auto",
+            height: "300px",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Form style={{ width: "90%", margin: "auto" }}>
             <div>
+              <h2>Login </h2>
               <label htmlFor="email">Email</label>
               <Field
                 type="email"
                 name="email"
                 placeholder="Enter Email Address"
+                style={{ width: "100%", padding: "5px" }}
               />
               <ErrorMessage name="email" component="div" />
             </div>
@@ -57,10 +68,14 @@ const Login = () => {
                 type="password"
                 name="password"
                 placeholder="Enter Password"
+                style={{ width: "100%", padding: "5px" }}
               />
+
               <ErrorMessage name="password" component="div" />
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" style={{ padding: "5px" }}>
+              Login
+            </button>
           </Form>
         </div>
       </Formik>

@@ -53,11 +53,27 @@ const Register = () => {
           localStorage.setItem("users", JSON.stringify(oldUsers));
         }}
       >
-        <div>
-          <Form>
+        <div
+          style={{
+            width: "500px",
+            backgroundColor: "#f5f5f5",
+            margin: "auto",
+            height: "400px",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <Form style={{ width: "90%", margin: "auto" }}>
             <div>
+              <h2>Register Form</h2>
+
               <label htmlFor="name">Name</label>
-              <Field type="text" name="name" placeholder="Enter Name" />
+              <Field
+                type="text"
+                name="name"
+                placeholder="Enter Name"
+                style={{ width: "100%", padding: "5px" }}
+              />
               <ErrorMessage name="name" component="div" />
             </div>
             <div>
@@ -66,6 +82,7 @@ const Register = () => {
                 type="text"
                 name="mobile"
                 placeholder="Enter Mobile Number"
+                style={{ width: "100%", padding: "5px" }}
               />
               <ErrorMessage name="mobile" component="div" />
             </div>
@@ -75,6 +92,7 @@ const Register = () => {
                 type="email"
                 name="email"
                 placeholder="Enter Email Address"
+                style={{ width: "100%", padding: "5px" }}
               />
               <ErrorMessage name="email" component="div" />
             </div>
@@ -84,6 +102,7 @@ const Register = () => {
                 type="password"
                 name="password"
                 placeholder="Enter Password"
+                style={{ width: "100%", padding: "5px" }}
               />
               <ErrorMessage name="password" component="div" />
             </div>
@@ -93,6 +112,7 @@ const Register = () => {
                 type="password"
                 name="confirmPassword"
                 placeholder="Enter Password again"
+                style={{ width: "100%", padding: "5px" }}
               />
               <ErrorMessage name="confirmPassword" component="div" />
             </div>
@@ -101,7 +121,11 @@ const Register = () => {
               <label htmlFor="termsAndCondition">Agree to T&C</label>
               <ErrorMessage name="termsAndCondition" component="div" />
             </div>
-            <button className="btn btn-primary btn-block mt-4" type="submit">
+            <button
+              className="btn btn-primary btn-block mt-4"
+              type="submit"
+              style={{ padding: "5px" }}
+            >
               Register
             </button>
           </Form>
