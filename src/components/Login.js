@@ -1,6 +1,6 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import React from "react";
 import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -9,14 +9,35 @@ const loginSchema = Yup.object().shape({
   password: Yup.string().required("password required"),
 });
 
+const authenticateUser = (values) => {
+  const users = JSON.parse(localStorage.getItem("users"));
+
+  let authUser = false;
+  users.map((user) => {
+    if (user.email === values.email && user.password === values.password) {
+      return (authUser = true);
+    }
+  });
+  return authUser;
+};
+
 const Login = () => {
+  const redirectUser = (values) => {
+    localStorage.setItem("loginUser", JSON.stringify(values));
+    navigate("/");
+  };
+
+  const navigate = useNavigate();
+
   return (
     <div>
       <Formik
         initialValues={{ email: "", password: "" }}
         validationSchema={loginSchema}
         onSubmit={(values) => {
-          console.log(values);
+          authenticateUser(values)
+            ? redirectUser(values)
+            : alert("Invalid login credentials");
         }}
       >
         <div>

@@ -2,11 +2,15 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 import * as Yup from "yup";
 
+require("yup-phone");
+
 const registerSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, "First Name must be 2 characters or long")
     .required("First Name required"),
-  mobile: Yup.number().required("Mobile number required"),
+  mobile: Yup.string()
+    .required("Mobile number required")
+    .matches(/^(?=.*[0-9])/, "please enter valid mobile number"),
   email: Yup.string()
     .email("Invalid email address format")
     .required("Email Required"),
@@ -26,7 +30,7 @@ const registerSchema = Yup.object().shape({
   termsAndCondition: Yup.boolean().isTrue("please agree to terms & conditions"),
 });
 
-const Regiter = () => {
+const Register = () => {
   return (
     <div>
       <Formik
@@ -42,8 +46,11 @@ const Regiter = () => {
         onSubmit={(values) => {
           setTimeout(() => {
             alert("user registered successfully");
-          });
+          }, 10000);
           console.log(values);
+          const oldUsers = JSON.parse(localStorage.getItem("users") || "[]");
+          oldUsers.push(values);
+          localStorage.setItem("users", JSON.stringify(oldUsers));
         }}
       >
         <div>
@@ -104,4 +111,4 @@ const Regiter = () => {
   );
 };
 
-export default Regiter;
+export default Register;
