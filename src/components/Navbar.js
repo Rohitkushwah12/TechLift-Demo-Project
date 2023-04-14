@@ -3,12 +3,12 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const isUserLogIn = localStorage.getItem("loginUser");
+  const isUserLogIn = localStorage.getItem("userAuth");
 
   const navigate = useNavigate();
 
   const handleDelete = () => {
-    localStorage.removeItem("loginUser");
+    localStorage.removeItem("userAuth");
     navigate("/login");
   };
   return (
@@ -19,6 +19,12 @@ const Navbar = () => {
             {" "}
             <li>
               <Link to="/">DashBoard</Link>
+            </li>
+            <li>
+              <Link to="/edit-profile">Edit Profile</Link>
+            </li>
+            <li>
+              <Link to="/change-password">Change Password</Link>
             </li>
             <li>
               <button onClick={() => handleDelete()}>Logout</button>

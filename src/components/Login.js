@@ -1,6 +1,8 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../store/authSlice";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -9,22 +11,19 @@ const loginSchema = Yup.object().shape({
   password: Yup.string().required("password required"),
 });
 
-const authenticateUser = (values) => {
-  const users = JSON.parse(localStorage.getItem("users"));
-
-  let authUser = false;
-  users.map((user) => {
-    if (user.email === values.email && user.password === values.password) {
-      return (authUser = true);
-    }
-  });
-  return authUser;
-};
-
 const Login = () => {
-  const redirectUser = (values) => {
-    localStorage.setItem("loginUser", JSON.stringify(values));
-    navigate("/");
+  const users = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+
+  const authenticateUser = (values) => {
+    let authUser = false;
+    users.map((user) => {
+      if (user.email === values.email && user.password === values.password) {
+        dispatch(loginAction(user));
+        return (authUser = true);
+      }
+    });
+    return authUser;
   };
 
   const navigate = useNavigate();
@@ -36,7 +35,7 @@ const Login = () => {
         validationSchema={loginSchema}
         onSubmit={(values) => {
           authenticateUser(values)
-            ? redirectUser(values)
+            ? navigate("/")
             : alert("Invalid login credentials");
         }}
       >

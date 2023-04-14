@@ -1,14 +1,4 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
 const DashBoard = () => {
-  const navigate = useNavigate();
-  const isUserLogIn = localStorage.getItem("loginUser");
-  useEffect(() => {
-    if (!isUserLogIn) {
-      navigate("/login");
-    }
-  });
   return (
     <div>
       <h1>DashBoard</h1>
