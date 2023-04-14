@@ -21,7 +21,14 @@ const userSlice = createSlice({
       saveState(state);
     },
     editUser(state, action) {
-      state.push();
+      console.log(action.payload);
+      state.map((user) => {
+        if (user.email === action.payload.email) {
+          user.name = action.payload.name;
+          user.mobile = action.payload.mobile;
+        }
+      });
+      saveState(state);
     },
     changePassword(state, action) {
       state.map((user) => {
