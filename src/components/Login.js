@@ -29,55 +29,73 @@ const Login = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={loginSchema}
-        onSubmit={(values) => {
-          authenticateUser(values)
-            ? navigate("/")
-            : alert("Invalid login credentials");
-        }}
-      >
-        <div
-          style={{
-            width: "400px",
-            backgroundColor: "#f5f5f5",
-            margin: "auto",
-            height: "300px",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Form style={{ width: "90%", margin: "auto" }}>
-            <div>
-              <h2>Login </h2>
-              <label htmlFor="email">Email</label>
-              <Field
-                type="email"
-                name="email"
-                placeholder="Enter Email Address"
-                style={{ width: "100%", padding: "5px" }}
-              />
-              <ErrorMessage name="email" component="div" />
-            </div>
-            <div>
-              <label htmlFor="password">Password</label>
-              <Field
-                type="password"
-                name="password"
-                placeholder="Enter Password"
-                style={{ width: "100%", padding: "5px" }}
-              />
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-12">
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={loginSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              setSubmitting(false);
+              authenticateUser(values)
+                ? navigate("/")
+                : alert("Invalid login credentials");
+            }}
+          >
+            {({ touched, values, errors, isSubmitting }) => (
+              <div>
+                <div className="row mb-5">
+                  <div className="col-lg-12 text-center">
+                    <h1 className="mt-5">Login Form</h1>
+                  </div>
+                </div>
+                <Form>
+                  <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <Field
+                      type="email"
+                      name="email"
+                      placeholder="Enter Email Address"
+                      className={`mt-2 form-control ${
+                        touched.email && errors.email ? "is-invalid" : ""
+                      }`}
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="password">Password</label>
+                    <Field
+                      type="password"
+                      name="password"
+                      placeholder="Enter Password"
+                      className={`mt-2 form-control ${
+                        touched.password && errors.password ? "is-invalid" : ""
+                      }`}
+                    />
 
-              <ErrorMessage name="password" component="div" />
-            </div>
-            <button type="submit" style={{ padding: "5px" }}>
-              Login
-            </button>
-          </Form>
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <button
+                    className="btn btn-primary btn-block mt-4"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Please wait..." : "Login"}
+                  </button>
+                </Form>
+              </div>
+            )}
+          </Formik>
         </div>
-      </Formik>
+      </div>
     </div>
   );
 };

@@ -2,8 +2,8 @@ import * as Yup from "yup";
 
 export const registerSchema = Yup.object().shape({
   name: Yup.string()
-    .min(2, "First Name must be 2 characters or long")
-    .required("First Name required"),
+    .min(2, "Name must be 2 characters or long")
+    .required("Name required"),
   mobile: Yup.string()
     .required("Mobile number required")
     .matches(/^(?=.*[0-9])/, "please enter valid mobile number"),

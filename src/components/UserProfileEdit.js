@@ -17,71 +17,82 @@ const UserProfileEdit = () => {
   const dispatch = useDispatch();
   const loginUser = useSelector((state) => state.userAuth);
   return (
-    <div>
-      <Formik
-        initialValues={{
-          name: loginUser.name,
-          mobile: loginUser.mobile,
-        }}
-        validationSchema={editUserSchema}
-        onSubmit={(values) => {
-          console.log(values);
-          dispatch(
-            editUser({
-              email: loginUser.email,
-              mobile: values.mobile,
-              name: values.name,
-            })
-          );
-          setTimeout(() => {
-            alert("Details Updated Successfully");
-          }, 2000);
-        }}
-      >
-        <div
-          style={{
-            width: "500px",
-            backgroundColor: "#f5f5f5",
-            margin: "auto",
-            height: "400px",
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Form style={{ width: "90%", margin: "auto" }}>
-            <div>
-              <h2>Update Form</h2>
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-12">
+          <Formik
+            initialValues={{
+              name: loginUser.name,
+              mobile: loginUser.mobile,
+            }}
+            validationSchema={editUserSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              setSubmitting(false);
+              dispatch(
+                editUser({
+                  email: loginUser.email,
+                  mobile: values.mobile,
+                  name: values.name,
+                })
+              );
+              setTimeout(() => {
+                alert("Details Updated Successfully");
+              }, 2000);
+            }}
+          >
+            {({ touched, errors, isSubmitting }) => (
+              <div>
+                <div className="row mb-5">
+                  <div className="col-lg-12 text-center">
+                    <h1 className="mt-5">Update Form</h1>
+                  </div>
+                </div>
+                <Form>
+                  <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <Field
+                      type="text"
+                      name="name"
+                      placeholder="Enter Name"
+                      className={`mt-2 form-control ${
+                        touched.name && errors.name ? "is-invalid" : ""
+                      }`}
+                    />
+                    <ErrorMessage
+                      name="name"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="mobile">Mobile Number</label>
+                    <Field
+                      type="text"
+                      name="mobile"
+                      placeholder="Enter Mobile Number"
+                      className={`mt-2 form-control ${
+                        touched.mobile && errors.mobile ? "is-invalid" : ""
+                      }`}
+                    />
+                    <ErrorMessage
+                      name="mobile"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
 
-              <label htmlFor="name">Name</label>
-              <Field
-                type="text"
-                name="name"
-                placeholder="Enter Name"
-                style={{ width: "100%", padding: "5px" }}
-              />
-              <ErrorMessage name="name" component="div" />
-            </div>
-            <div>
-              <label htmlFor="mobile">Mobile Number</label>
-              <Field
-                type="text"
-                name="mobile"
-                placeholder="Enter Mobile Number"
-                style={{ width: "100%", padding: "5px" }}
-              />
-              <ErrorMessage name="mobile" component="div" />
-            </div>
-
-            <button
-              className="btn btn-primary btn-block mt-4"
-              type="submit"
-              style={{ padding: "5px" }}
-            >
-              Update
-            </button>
-          </Form>
+                  <button
+                    className="btn btn-primary btn-block mt-4"
+                    type="submit"
+                  >
+                    {isSubmitting ? "Please wait..." : "Update"}
+                  </button>
+                </Form>
+              </div>
+            )}
+          </Formik>
         </div>
-      </Formik>
+      </div>
     </div>
   );
 };

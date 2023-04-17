@@ -12,36 +12,51 @@ const Navbar = () => {
     navigate("/login");
   };
   return (
-    <div>
-      <ul>
+    <nav className="navbar navbar-dark bg-dark">
+      <ul className="navbar-nav">
         {isUserLogIn ? (
           <>
             {" "}
             <li>
-              <Link to="/">DashBoard</Link>
+              <Link className="nav-link" to="/">
+                DashBoard
+              </Link>
             </li>
             <li>
-              <Link to="/edit-profile">Edit Profile</Link>
+              <Link className="nav-link" to="/edit-profile">
+                Edit Profile
+              </Link>
             </li>
             <li>
-              <Link to="/change-password">Change Password</Link>
+              <Link className="nav-link" to="/change-password">
+                Change Password
+              </Link>
             </li>
             <li>
-              <button onClick={() => handleDelete()}>Logout</button>
+              <button
+                className="btn btn-success "
+                onClick={() => handleDelete()}
+              >
+                Logout
+              </button>
             </li>
           </>
         ) : (
           <>
             <li>
-              <Link to="/register">Register</Link>
+              <Link className="nav-link" to="/register">
+                Register
+              </Link>
             </li>
             <li>
-              <Link to="/login">Login</Link>
+              <Link className="nav-link" to="/login">
+                Login
+              </Link>
             </li>
           </>
         )}
       </ul>
-    </div>
+    </nav>
   );
 };
 

@@ -45,50 +45,97 @@ const ChangePassword = () => {
   const dispatch = useDispatch();
   console.log(loginUser);
   return (
-    <div>
-      <h2>Change Password</h2>
-      <Formik
-        initialValues={{
-          oldPassword: "",
-          newPassword: "",
-          confirmNewPassword: "",
-        }}
-        validationSchema={changePasswordSchema}
-        onSubmit={(values) => {
-          authenticateChangePassword(values);
-        }}
-      >
-        <Form>
-          <div>
-            <lable htmlFor="oldPassword">Old Password</lable>
-            <Field
-              type="password"
-              name="oldPassword"
-              placeholder="Enter Old Password"
-            />
-            <ErrorMessage name="oldPassword" component="div" />
-          </div>
-          <div>
-            <lable htmlFor="password">New Password</lable>
-            <Field
-              type="password"
-              name="newPassword"
-              placeholder="Enter New Password"
-            />
-            <ErrorMessage name="newPassword" component="div" />
-          </div>
-          <div>
-            <lable htmlFor="confirmNewPassword">Confirm New Password</lable>
-            <Field
-              type="password"
-              name="confirmNewPassword"
-              placeholder="Enter New Password Again"
-            />
-            <ErrorMessage name="confirmNewPassword" component="div" />
-          </div>
-          <button type="submit">Change Password</button>
-        </Form>
-      </Formik>
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-12">
+          <Formik
+            initialValues={{
+              oldPassword: "",
+              newPassword: "",
+              confirmNewPassword: "",
+            }}
+            validationSchema={changePasswordSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              setSubmitting(false);
+              authenticateChangePassword(values);
+            }}
+          >
+            {({ touched, values, errors, isSubmitting }) => (
+              <div>
+                <div className="row mb-5">
+                  <div className="col-lg-12 text-center">
+                    <h1 className="mt-5">Change Password</h1>
+                  </div>
+                </div>
+                <Form>
+                  <div className="form-group">
+                    <lable htmlFor="oldPassword">Old Password</lable>
+                    <Field
+                      type="password"
+                      name="oldPassword"
+                      placeholder="Enter Old Password"
+                      className={`mt-2 form-control ${
+                        touched.oldPassword && errors.oldPassword
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                    />
+                    <ErrorMessage
+                      name="oldPassword"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <lable htmlFor="password">New Password</lable>
+                    <Field
+                      type="password"
+                      name="newPassword"
+                      placeholder="Enter New Password"
+                      className={`mt-2 form-control ${
+                        touched.newPassword && errors.newPassword
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                    />
+                    <ErrorMessage
+                      name="newPassword"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <lable htmlFor="confirmNewPassword">
+                      Confirm New Password
+                    </lable>
+                    <Field
+                      type="password"
+                      name="confirmNewPassword"
+                      placeholder="Enter New Password Again"
+                      className={`mt-2 form-control ${
+                        touched.confirmNewPassword && errors.confirmNewPassword
+                          ? "is-invalid"
+                          : ""
+                      }`}
+                    />
+                    <ErrorMessage
+                      name="confirmNewPassword"
+                      component="div"
+                      className="invalid-feedback"
+                    />
+                  </div>
+                  <button
+                    className="btn btn-primary btn-block mt-4"
+                    type="submit"
+                  >
+                    {isSubmitting ? "Please wait..." : "Change Password"}
+                  </button>
+                </Form>
+              </div>
+            )}
+          </Formik>
+        </div>
+      </div>
     </div>
   );
 };
