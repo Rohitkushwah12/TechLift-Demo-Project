@@ -74,7 +74,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: #f5f5f5;
 }
 
 [tabindex="-1"]:focus {
@@ -589,7 +589,7 @@ pre code {
   padding-bottom: 20px;
   margin-right: auto;
   margin-left: auto;
-  background-color: #f5f5f5;
+  background-color: #fff;
   border-radius: 10px;
   margin-top: 25px;
 }
@@ -2317,10 +2317,9 @@ textarea.form-control.is-valid {
 }
 
 .invalid-feedback {
-  display: none;
   width: 100%;
-  margin-top: 0.25rem;
-  font-size: 80%;
+
+  font-size: 90%;
   color: #dc3545;
 }
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { saveState } from "../components/LocalStorage";
+import { saveState } from "../utils/LocalStorage";
 
 const users =
   localStorage.getItem("users") !== null

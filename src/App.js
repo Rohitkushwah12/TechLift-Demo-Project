@@ -1,11 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import DashBoard from "./components/DashBoard";
-import Register from "./components/Register";
-import Login from "./components/Login";
-import Navbar from "./components/Navbar";
-import UserProfileEdit from "./components/UserProfileEdit";
-import ChangePassword from "./components/ChangePassword";
-import UserAuthentication from "./components/UserAuthentication";
+
+import DashBoard from "./components/DashBoard/DashBoard";
+import Register from "./components/Pages/Register";
+import Login from "./components/Pages/Login";
+import UserProfileEdit from "./components/Pages/UserProfileEdit";
+import ChangePassword from "./components/Pages/ChangePassword";
+import UserAuthentication from "./components/UserAuth/UserAuthentication";
+import Navbar from "./components/Navbar/Navbar";
+import {
+  changePassword,
+  editProfile,
+  login,
+  register,
+} from "./routeTypes/routeTypes";
 
 function App() {
   return (
@@ -16,14 +23,17 @@ function App() {
           path="/"
           element={<UserAuthentication component={DashBoard} />}
         />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path={register} element={<Register />} />
         <Route
-          path="/edit-profile"
+          path={login}
+          element={<UserAuthentication component={Login} />}
+        />
+        <Route
+          path={editProfile}
           element={<UserAuthentication component={UserProfileEdit} />}
         />
         <Route
-          path="/change-password"
+          path={changePassword}
           element={<UserAuthentication component={ChangePassword} />}
         />
 
